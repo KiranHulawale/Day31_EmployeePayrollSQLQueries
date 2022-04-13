@@ -1,0 +1,31 @@
+create database payroll_service;
+show databases;
+use payroll_service;
+show tables;
+
+create table employee_payroll(id int primary key auto_increment,emp_name varchar(20),salary long, start_date date);
+
+describe employee_payroll;
+
+insert into employee_payroll (emp_name,salary,start_date) values ('Kiran','30000','2022-01-23'), ('Vibha','40000','2022-01-14'), 
+('Deepak', '50000', '2022-03-10'), ('Arun', '60000', '2022-02-26');
+
+select *from employee_payroll;
+
+select salary from employee_payroll where emp_name = 'Vibha';
+
+select *from employee_payroll where start_date between cast('2022-01-25' as date) and date(now());
+
+alter table employee_payroll add column gender varchar(5) after emp_name;
+
+alter table employee_payroll drop column gender;
+
+update employee_payroll set gender ='M' where emp_name ='Deepak' or emp_name= 'Arun';
+update employee_payroll set gender ='F' where emp_name ='Kiran' or emp_name= 'Vibha';
+
+select min(salary) from employee_payroll where gender='M' group by gender;
+select max(salary) from employee_payroll where gender='F' group by gender;
+select avg(salary) from employee_payroll where gender='M' group by gender;
+select sum(salary) from employee_payroll where gender='M' group by gender;
+
+select count(*) from employee_payroll;
